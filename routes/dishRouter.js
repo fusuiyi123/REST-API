@@ -9,7 +9,7 @@ const dishRouter = express.Router();
 
 dishRouter.use(bodyParser.json());
 
-// ops for /
+// http://localhost:3000/dishes
 dishRouter.route('/')
 .get((req,res,next) => {
     Dishes.find({})
@@ -44,12 +44,12 @@ dishRouter.route('/')
     .catch((err) => next(err));
 });
 
-// ops for /:dishId
+// http://localhost:3000/dishes/dishId
 dishRouter.route('/:dishId')
 .get((req,res,next) => {
     Dishes.findById(req.params.dishId)
     .then((dish) => {
-        console.log('Dish Created', dish);
+        console.log('Dish found', dish);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(dish);
@@ -82,7 +82,7 @@ dishRouter.route('/:dishId')
 });
 
 
-// ops for /:dishId/comments
+// http://localhost:3000/dishes/dishId/comments
 dishRouter.route('/:dishId/comments')
 .get((req,res,next) => {
     Dishes.findById(req.params.dishId)
@@ -147,7 +147,7 @@ dishRouter.route('/:dishId/comments')
     .catch((err) => next(err));
 });
 
-// ops for /:dishId/comments/:commentId
+// http://localhost:3000/dishes/dishId/comments/commentId
 dishRouter.route('/:dishId/comments/:commentId')
 .get((req,res,next) => {
     Dishes.findById(req.params.dishId)
